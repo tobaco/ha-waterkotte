@@ -593,8 +593,11 @@ class EcotouchBridge:
                         for idx in range(len(temp_values)):
                             if temp_values[idx]:
                                 final_value = final_value + ", " + str(value_map[idx])
+
+                        # we need to trim the firsts initial added ', '
                         if len(final_value)>0:
                             final_value = final_value[2:]
+
                         result[a_eco_tag]["value"] = final_value
 
                 except KeyError:

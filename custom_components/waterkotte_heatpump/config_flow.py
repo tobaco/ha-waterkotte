@@ -78,7 +78,10 @@ class WaterkotteHeatpumpFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 user_input[CONF_TAGS_PER_REQUEST] = self._tags_per_request
                 return self.async_create_entry(title=TITLE, data=user_input)
             else:
-                self._errors["base"] = "auth"
+                if user_input[CONF_SYSTEMTYPE] == EASYCON:
+                    self._errors["base"] = "type"
+                else:
+                    self._errors["base"] = "auth"
 
             return await self._show_config_form(user_input)
 
@@ -102,8 +105,8 @@ class WaterkotteHeatpumpFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                         {
                             "select": {
                                 "options": [
-                                    {"label": "EcoTouch Mode", "value": ECOTOUCH},
-                                    {"label": "EasyCon Mode", "value": EASYCON},
+                                    {"label": "EcoTouch Mode [require Username & Password]", "value": ECOTOUCH},
+                                    {"label": "EasyCon Mode [older Waterkotte Models without login credentials]", "value": EASYCON},
                                 ],
                                 "mode": "dropdown",
                             }
@@ -158,7 +161,10 @@ class WaterkotteHeatpumpFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             return True
 
         except Exception as exec:  # pylint: disable=broad-except
-            _LOGGER.error(f"Exception while test credentials: {exec}")
+            if isinstance(exec, FileNotFoundError):
+                _LOGGER.error(f"EASYCON Mode caused HTTP 404")
+            else:
+                _LOGGER.error(f"Exception while test credentials: {exec}")
         return False
 
 
