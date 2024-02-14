@@ -34,10 +34,20 @@ class TagData(NamedTuple):
         else:
             assert len(self.tags) == 1
             if first_tag[0] == "I":
-                if self.bit is None:
-                    return int(first_val)
-                else:
+                # single bit field
+                if self.bit is not None:
                     return (int(first_val) & (1 << self.bit)) > 0
+
+                # a bit array?
+                elif self.bits is not None:
+                    ret = [False] * len(self.bits)
+                    for idx in range(len(self.bits)):
+                        ret[idx] = (int(first_val) & (1 << self.bits[idx])) > 0
+                    return ret
+
+                # default implementation
+                else:
+                    return int(first_val)
 
             elif first_tag[0] == "D":
                 if first_val == "1":
@@ -220,3 +230,5 @@ class TagData(NamedTuple):
     decode_function: Callable = _decode_value_default
     encode_function: Callable = _encode_value_default
     bit: int = None
+    bits: [int] = None
+    translate: bool = False

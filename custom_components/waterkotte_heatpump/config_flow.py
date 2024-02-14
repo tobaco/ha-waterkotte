@@ -119,11 +119,13 @@ class WaterkotteHeatpumpFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         """Return true if credentials is valid."""
         try:
             hasPort = host.find(":")
+            _LOGGER.debug(f"host entered: {host} has port? {hasPort}")
             if hasPort == -1:
                 self._ip = gethostbyname(host)
             else:
                 self._ip = gethostbyname(host[:hasPort])
 
+            _LOGGER.debug(f"ip detected: {self._ip}")
             session = async_create_clientsession(self.hass)
             client = WaterkotteHeatpumpApiClient(
                 host=host,
@@ -132,7 +134,8 @@ class WaterkotteHeatpumpFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 session=session,
                 tags=None,
                 systemType=system_type,
-                tagsPerRequest=tags_per_request
+                tagsPerRequest=tags_per_request,
+                lang=self.hass.config.language.lower()
             )
             await client.login()
             init_tags = [
@@ -155,7 +158,7 @@ class WaterkotteHeatpumpFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             return True
 
         except Exception as exec:  # pylint: disable=broad-except
-            _LOGGER.error(f"{exec}", exec)
+            _LOGGER.error(f"Exception while test credentials: {exec}")
         return False
 
 

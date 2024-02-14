@@ -726,3 +726,62 @@ SYSTEM_IDS: Final = [
     "ET 5222.4 Tandem",
     None,
 ]
+
+TRANSLATIONS:Final = {
+    "de": {
+        "I52": {
+            0: "F100: Motorschutzschalter 1",
+            1: "F101: Motorschutzschalter 2",
+            2: "F102: Phasenfolgeüberwachung",
+            3: "F103: Störung Wärmequelle",
+            4: "F110: HD-Pressostat",
+            5: "F111: Verflüssigungstemperatur zu niedrig",
+            6: "F120: ND-Pressostat",
+            7: "F121: Drucküberwachung Verdampfer",
+            8: "F122: Temperaturüberwachung Verdampfer",
+            9: "F123: Nasslauf",
+            10: "F130: Ausfall 4-Wege Ventil",
+            11: "F200: Steuergerät Kommunikationsüberwachung Ausfall",
+            12: "F201: Das Gerät pCOe oder EVD ist nicht vorhanden oder funktioniert nicht richtig",
+            13: "F301: Ventilmotorfehler",
+            14: "F600: Störung Außeneinheit"
+        },
+        "I53": {
+            0: "I011: T Quelle Aus < OK",
+            1: "I012: p Kondensator > OK",
+            2: "I013: Ext Abschaltung",
+            3: "I014: Schalthäufigkeit Verdichter 1",
+            4: "I014: Schalthäufigkeit Verdichter 2",
+            5: "I014: Schalthäufigkeit ext. Wärmeerzeuger",
+            6: "I015: T Quelle Aus ERR"
+        }
+    },
+    "en": {
+        "I52": {
+            0: "F100: Motor protection switch 1",
+            1: "F101: Motor protection awitch 2",
+            2: "F102: Phase sequence monitoring",
+            3: "F103: Primary Source",
+            4: "F110: HP-Pressostat",
+            5: "F111: Condensing temperature too low",
+            6: "F120: LP-Pressostat",
+            7: "F121: Pressure monitoring evaporator",
+            8: "F122: Temperature monitoring evaporator",
+            9: "F123: Wet run",
+            10: "F130: Failure 4-way valve",
+            11: "F200: Failure control unit communication monitoring",
+            12: "F201: Device pCOe or EVD is not available or does not function properly",
+            13: "F301: Valve motor error",
+            14: "F600: Failure outdoor unit"
+        },
+        "I53": {
+            0: "I011: T Quelle Aus < OK",
+            1: "I012: p Kondensator > OK",
+            2: "I013: Ext Abschaltung",
+            3: "I014: Schalthäufigkeit Verdichter 1",
+            4: "I014: Schalthäufigkeit Verdichter 2",
+            5: "I014: Schalthäufigkeit ext. Wärmeerzeuger",
+            6: "I015: T Quelle Aus ERR"
+        }
+    }
+}

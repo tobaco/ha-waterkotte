@@ -104,7 +104,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
         session=session,
         tags=tags,
         systemType=system_type,
-        tagsPerRequest=tags_per_request
+        tagsPerRequest=tags_per_request,
+        lang=hass.config.language.lower()
     )
     if COORDINATOR is not None:
         coordinator = WaterkotteHeatpumpDataUpdateCoordinator(
