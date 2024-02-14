@@ -744,7 +744,8 @@ TRANSLATIONS:Final = {
             11: "F200: Steuergerät Kommunikationsüberwachung Ausfall",
             12: "F201: Das Gerät pCOe oder EVD ist nicht vorhanden oder funktioniert nicht richtig",
             13: "F301: Ventilmotorfehler",
-            14: "F600: Störung Außeneinheit"
+            14: "F600: Störung Außeneinheit",
+            15: "BIT15: UNBEKANNT"
         },
         "I53": {
             0: "I011: T Quelle Aus < OK",
@@ -772,7 +773,8 @@ TRANSLATIONS:Final = {
             11: "F200: Failure control unit communication monitoring",
             12: "F201: Device pCOe or EVD is not available or does not function properly",
             13: "F301: Valve motor error",
-            14: "F600: Failure outdoor unit"
+            14: "F600: Failure outdoor unit",
+            15: "BIT15: UNKNOWN"
         },
         "I53": {
             0: "I011: T Quelle Aus < OK",

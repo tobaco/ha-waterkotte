@@ -136,8 +136,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     # of all active tags - so that we only query the information from the heatpump that is currently
     # active in HA
     client.tags = generate_tag_list(hass, entry.entry_id)
+    if len(client.tags) == 0:
+        asyncio.create_task(update_client_tag_list(coordinator, client, hass, entry.entry_id))
+    else:
+        asyncio.create_task(update_data(coordinator))
 
-    await coordinator.async_refresh()
     COORDINATOR = coordinator
 
     service = waterkotteservice.WaterkotteHeatpumpService(hass, entry, coordinator)
@@ -147,8 +150,17 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
                                  supports_response=SupportsResponse.ONLY)
     hass.services.async_register(DOMAIN, "get_energy_balance_monthly", service.get_energy_balance_monthly,
                                  supports_response=SupportsResponse.ONLY)
+
     return True
 
+async def update_client_tag_list(coordinator, client, hass, entry_id):
+    _LOGGER.debug(f"rechecking tags... in 15sec")
+    await asyncio.sleep(15)
+    client.tags = generate_tag_list(hass, entry_id)
+    asyncio.create_task( update_data(coordinator) )
+
+async def update_data(coordinator):
+    await coordinator.async_refresh()
 
 @staticmethod
 def generate_tag_list(hass: HomeAssistant, config_entry_id: str) -> List[EcotouchTag]:

@@ -1,3 +1,4 @@
+#import logging
 import math
 import struct
 from datetime import datetime, timedelta, time
@@ -5,6 +6,7 @@ from typing import NamedTuple, List, Collection, Callable
 
 from custom_components.waterkotte_heatpump.pywaterkotte_ha.const import HEATING_MODES, SERIES, SYSTEM_IDS
 
+#_LOGGER: logging.Logger = logging.getLogger(__package__)
 
 class InvalidValueException(Exception):
     """A InvalidValueException."""
@@ -43,6 +45,7 @@ class TagData(NamedTuple):
                     ret = [False] * len(self.bits)
                     for idx in range(len(self.bits)):
                         ret[idx] = (int(first_val) & (1 << self.bits[idx])) > 0
+                    #_LOGGER.debug(f"BITS: {first_tag} ({first_val}) -> {ret}")
                     return ret
 
                 # default implementation
